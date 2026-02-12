@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Models;
+
+use App\ReviewStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Review extends Model
+{
+    /** @use HasFactory<\Database\Factories\ReviewFactory> */
+    use HasFactory;
+
+    protected $casts = ['status' => ReviewStatus::class];
+
+    public function statusCounts(User $user)
+    {
+        // TO-DO: Group count by enum cases (for/against)
+        $counts = $user->reviews()
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        return collect(ReviewStatus::cases())
+            ->mapWithKeys(fn ($status) => [
+                $status->value => $counts->get($status->value, 0)
+            ])
+            ->put('all', $user->ideas()->count());
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}
