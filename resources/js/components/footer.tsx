@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="mt-10 footer items-center bg-neutral p-4 text-neutral-content sm:footer-horizontal">
+        <footer className="mt-10 footer items-center justify-around bg-neutral p-4 text-neutral-content sm:footer-horizontal">
             <aside className="grid-flow-col items-center">
                 <p>
                     Created by Nicholas Lang © {new Date().getFullYear()}.

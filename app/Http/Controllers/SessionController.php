@@ -13,7 +13,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth', [
+        return Inertia::render('auth', [
             'state' => 'login',
         ]);
     }

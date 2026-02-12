@@ -34,7 +34,7 @@ class ReviewController extends Controller
 
         $statusCounts = Review::statusCounts($user);
 
-        return Inertia::render('Reviews', [
+        return Inertia::render('reviews', [
             'reviews' => $reviews,
             'statusCounts' => $statusCounts,
         ]);
