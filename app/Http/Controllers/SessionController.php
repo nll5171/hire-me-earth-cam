@@ -14,7 +14,8 @@ class SessionController extends Controller
     public function create()
     {
         return Inertia::render('auth', [
-            'state' => 'login',
+            'isRegister' => false,
+            'loggedIn' => Auth::user() != null,
         ]);
     }
 
@@ -48,6 +49,8 @@ class SessionController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        dd(Auth::User());
 
         return route('home');
     }

@@ -1,6 +1,13 @@
-import { Link } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 
-export default function Navbar() {
+export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
+    const { delete: destroy } = useForm({});
+
+    function logout(e: Event) {
+        e.preventDefault();
+        destroy('/logout');
+    }
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -34,12 +41,42 @@ export default function Navbar() {
                             <Link href="/">Home</Link>
                         </li>
                         <li>
-                            <Link href="/reviews">Reviews</Link>
+                            <Link href="/reviews">Functionality Demo</Link>
                         </li>
+                        <li>
+                            <a href="https://nll5171.github.io/Nick_Lang_CV.pdf">
+                                Resume
+                            </a>
+                        </li>
+                        {loggedIn ? (
+                            <li>
+                                <form onSubmit={logout}>
+                                    <button className="font-bold" type="submit">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link className="font-bold" href="/login">
+                                        Login
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        className="font-bold"
+                                        href="/register"
+                                    >
+                                        Register
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
                 <Link href="/" className="btn text-xl btn-ghost">
-                    Please Hire Me
+                    For Your Consideration
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -48,17 +85,35 @@ export default function Navbar() {
                         <Link href="/">Home</Link>
                     </li>
                     <li>
-                        <Link href="/reviews">Why You Should Hire Me</Link>
+                        <Link href="/reviews">Functionality Demo</Link>
+                    </li>
+                    <li>
+                        <a href="https://nll5171.github.io/Nick_Lang_CV.pdf">
+                            Resume
+                        </a>
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end space-x-2">
-                <Link className="btn btn-outline btn-secondary" href="/login">
-                    Log In
-                </Link>
-                <Link className="btn btn-primary" href="/register">
-                    Register
-                </Link>
+            <div className="navbar-end hidden space-x-2 sm:flex">
+                {loggedIn ? (
+                    <form onSubmit={logout}>
+                        <button type="submit" className="btn btn-primary">
+                            Logout
+                        </button>
+                    </form>
+                ) : (
+                    <>
+                        <Link
+                            className="btn btn-outline btn-secondary"
+                            href="/login"
+                        >
+                            Login
+                        </Link>
+                        <Link className="btn btn-primary" href="/register">
+                            Register
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     );

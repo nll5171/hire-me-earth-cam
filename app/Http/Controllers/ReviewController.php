@@ -17,24 +17,23 @@ class ReviewController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
-
-        // TO-DO: Add additional filters
-        //   - User specific
-        //   - Status (for/against) [Implemented]
-        //   - Date?
-        $reviews = $user
-            ->reviews()
-            ->when(
-                in_array($request->status, ReviewStatus::values()),
-                    fn ($query) => $query->where('status', $request->status)
-            )
+        // Filter by user_id, status (for/against), updated_at
+        $reviews = Review::query()
+            ->when($request->user_id,
+                fn ($query) => $query->where('user_id', $request->user_id))
+            ->when(in_array($request->status, ReviewStatus::values()),
+                fn ($query) => $query->where('status', $request->status))
+            ->when($request->updated_at,
+                fn ($query) => true) // TO-DO: Filter by updated_at somehow
             ->latest()
             ->get();
 
-        $statusCounts = Review::statusCounts($user);
+
+        $statusCounts = Review::statusCounts();
+        //dd($reviews);
 
         return Inertia::render('reviews', [
+            'loggedIn' => Auth::user() != null,
             'reviews' => $reviews,
             'statusCounts' => $statusCounts,
         ]);

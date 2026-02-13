@@ -3,20 +3,20 @@ import Hero from '@/components/hero';
 import List from '@/components/list';
 import AppLayout from '@/layouts/app-layout';
 
-export default function Home() {
+export default function Home({ loggedIn }: { loggedIn: boolean }) {
     return (
-        <AppLayout title="Home">
+        <AppLayout title="Home" loggedIn={loggedIn}>
             <div className="space-y-18">
                 <Hero
                     imgURL="https://www.earthcamhq.com/img/gallery_new/panos/GPX10Pano_042918.jpg"
-                    title="Please consider me"
+                    title="For your consideration"
                     desc="A Laravel/React site created by Nicholas Lang to apply for the JR. Backend Developer role with EarthCam."
                     btnText="Why choose me?"
                     btnLink="#why"
                 />
 
                 <div id="why" className="mx-4 max-w-7xl xl:m-auto">
-                    <div className="flex items-center gap-x-15">
+                    <div className="flex flex-col items-center justify-center gap-x-15 gap-y-10 md:flex-row">
                         <div>
                             <h2 className="text-4xl font-bold">
                                 Why choose me?
@@ -113,7 +113,7 @@ export default function Home() {
                             <p className="mt-8">
                                 This site was designed to perform fairly simple{' '}
                                 <strong>CRUD</strong> (Create, Read, Update,
-                                Delete) operations, requiring login to create,
+                                Delete) operations, requiring a login to create,
                                 update, and delete. Given that I wanted to
                                 complete this before applications were closed, I
                                 apologize that I couldn't provide a more
@@ -121,7 +121,7 @@ export default function Home() {
                                 Laravel.
                             </p>
                         </div>
-                        <figure className="hidden min-w-1/4 space-y-2 md:block">
+                        <figure className="min-w-1/4 space-y-2">
                             <img
                                 className="w-full rounded-3xl object-cover"
                                 src="https://nll5171.github.io/img/nick.png"

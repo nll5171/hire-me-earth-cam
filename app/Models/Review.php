@@ -14,10 +14,10 @@ class Review extends Model
 
     protected $casts = ['status' => ReviewStatus::class];
 
-    public function statusCounts(User $user)
+    public static function statusCounts()
     {
         // TO-DO: Group count by enum cases (for/against)
-        $counts = $user->reviews()
+        $counts = Review::query()
             ->selectRaw('status, count(*) as count')
             ->groupBy('status')
             ->pluck('count', 'status');
@@ -26,7 +26,7 @@ class Review extends Model
             ->mapWithKeys(fn ($status) => [
                 $status->value => $counts->get($status->value, 0)
             ])
-            ->put('all', $user->ideas()->count());
+            ->put('all', Review::all()->count());
     }
 
     public function user(): BelongsTo

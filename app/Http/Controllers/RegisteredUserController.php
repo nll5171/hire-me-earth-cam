@@ -17,7 +17,8 @@ class RegisteredUserController extends Controller
     {
         // TO-DO: Display react view using Intertia
         return Inertia::render('auth', [
-            'state' => 'register',
+            'isRegister' => true,
+            'loggedIn' => Auth::user() != null,
         ]);
     }
 

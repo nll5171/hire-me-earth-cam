@@ -3,12 +3,13 @@
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('home', [
-
+        'loggedIn' => Auth::user() != null,
     ]);
 })->name('home');
 
