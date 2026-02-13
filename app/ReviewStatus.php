@@ -11,7 +11,7 @@ enum ReviewStatus: int
     {
         return match ($this) {
             self::FOR => 'For',
-            self::AGAINST => 'Against'
+            self::AGAINST => 'Against',
         };
     }
 

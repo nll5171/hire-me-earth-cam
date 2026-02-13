@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import type { review } from '@/types/reviews';
+import ReviewSearchFilters from './review-search-filters';
 import ReviewTimelineForm from './review-timeline-form';
 import ReviewTimelineItem from './review-timeline-item';
 
@@ -35,6 +36,8 @@ export default function ReviewTimeline({
                     </Link>
                 )}
             </div>
+
+            <ReviewSearchFilters uid={uid} />
 
             {reviews.length > 0 || creating ? (
                 <ul className="timeline timeline-vertical">

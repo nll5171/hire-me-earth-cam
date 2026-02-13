@@ -19,10 +19,10 @@ class ReviewController extends Controller
     {
         // Filter by user_id, status (for/against), updated_at
         $reviews = Review::query()
-            // ->when($request->user_id,
-            //     fn ($query) => $query->where('user_id', $request->user_id))
-            // ->when(in_array($request->status, ReviewStatus::values()),
-            //     fn ($query) => $query->where('status', $request->status))
+            ->when($request->user_id,
+                fn ($query) => $query->where('user_id', $request->user_id))
+            ->when(in_array($request->status ?? -1, ReviewStatus::values()),
+                fn ($query) => $query->where('status', $request->status))
             // ->when($request->updated_at,
             //     fn ($query) => true) // TO-DO: Filter by updated_at somehow
             ->latest()
