@@ -1,3 +1,5 @@
-export default function ReviewSearchFilters({}) {
+import { useState } from 'react';
+
+export default function ReviewSearchFilters() {
     return <></>;
 }

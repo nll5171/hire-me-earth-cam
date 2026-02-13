@@ -3,7 +3,7 @@ import { Link, useForm } from '@inertiajs/react';
 export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
     const { delete: destroy } = useForm({});
 
-    function logout(e: Event) {
+    function logout(e) {
         e.preventDefault();
         destroy('/logout');
     }
@@ -34,7 +34,7 @@ export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
                         </svg>
                     </div>
                     <ul
-                        tabIndex="-1"
+                        tabIndex={-1}
                         className="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow"
                     >
                         <li>

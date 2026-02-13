@@ -32,7 +32,7 @@ class ReviewController extends Controller
         $statusCounts = Review::statusCounts();
 
         return Inertia::render('reviews', [
-            'loggedIn' => Auth::user() != null,
+            'uid' => Auth::user()->id ?? -1,
             'reviews' => $reviews,
             'statusCounts' => $statusCounts,
         ]);
