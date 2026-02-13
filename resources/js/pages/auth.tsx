@@ -1,4 +1,3 @@
-import { Link } from '@inertiajs/react';
 import AuthForm from '@/components/auth/auth-form';
 import AppLayout from '@/layouts/app-layout';
 
