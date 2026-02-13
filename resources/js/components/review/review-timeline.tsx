@@ -1,4 +1,8 @@
+import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import type { review } from '@/types/reviews';
+import ReviewTimelineForm from './review-timeline-form';
+import ReviewTimelineItem from './review-timeline-item';
 
 export default function ReviewTimeline({
     uid,
@@ -7,45 +11,49 @@ export default function ReviewTimeline({
     uid: number;
     reviews: Array<review>;
 }) {
+    // For displaying review creation form
+    const [creating, setCreating] = useState(false);
+
     return (
         <>
             <h2 className="text-center text-2xl font-bold">
                 Here's what some "definitely real" people have had to say.
             </h2>
 
-            {reviews.length >= 0 ? (
+            <div className="flex items-center justify-center gap-4">
+                <span className="text-sm">Want to add your own review?</span>
+                {uid !== -1 ? (
+                    <button
+                        className="btn btn-outline btn-primary"
+                        onClick={() => setCreating(true)}
+                    >
+                        Add review
+                    </button>
+                ) : (
+                    <Link className="btn btn-outline btn-primary" href="/login">
+                        Login
+                    </Link>
+                )}
+            </div>
+
+            {reviews.length > 0 || creating ? (
                 <ul className="timeline timeline-vertical">
-                    <li>
-                        <div className="timeline-start timeline-box bg-success p-6 text-base">
-                            He's a quick learner, more than capable of adapting
-                            to new technologies in a short time-frame.
-                        </div>
-                        <hr className="w-4" />
-                    </li>
-                    <li>
-                        <hr className="w-4" />
-                        <div className="timeline-end timeline-box bg-error p-6 text-base">
-                            I don't think it'd be smart of me to mention any
-                            negatives, unfortunately.
-                        </div>
-                        <hr className="w-4" />
-                    </li>
-                    <li>
-                        <hr />
-                        <div className="timeline-start timeline-box">iPod</div>
-                        <hr />
-                    </li>
-                    <li>
-                        <hr />
-                        <div className="timeline-end timeline-box">iPhone</div>
-                        <hr />
-                    </li>
-                    <li>
-                        <hr />
-                        <div className="timeline-start timeline-box">
-                            Apple Watch
-                        </div>
-                    </li>
+                    {creating && (
+                        <li>
+                            <ReviewTimelineForm setMaking={setCreating} />
+                            <hr className="w-4" />
+                        </li>
+                    )}
+
+                    {reviews.map((review, index) => (
+                        <li key={review.id}>
+                            {index > 0 && <hr className="w-4" />}
+                            <ReviewTimelineItem uid={uid} review={review} />
+                            {index < reviews.length - 1 && (
+                                <hr className="w-4" />
+                            )}
+                        </li>
+                    ))}
                 </ul>
             ) : (
                 <p>Nothing apparently.</p>

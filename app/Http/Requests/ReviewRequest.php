@@ -23,7 +23,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string', 'min:3', 'max:1000'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'integer']
         ];
     }
 }

@@ -43,7 +43,8 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        // TO-DO: Process creation of a new review in the DB
+        dd($request);
+
         $data = $request->safe()->all();
         Auth::user()->reviews()->create($data);
 

@@ -11,7 +11,7 @@ export default function ReviewTimelineItem({
     review: review;
 }) {
     const { delete: destroy } = useForm({});
-    const [editing, isEditing] = useState(false);
+    const [editing, setEditing] = useState(false);
 
     function deleteReview(e) {
         e.preventDefault();
@@ -19,7 +19,7 @@ export default function ReviewTimelineItem({
     }
 
     if (editing)
-        return <ReviewTimelineForm review={review} isEditing={isEditing} />;
+        return <ReviewTimelineForm review={review} setMaking={setEditing} />;
 
     return (
         <div
@@ -31,11 +31,11 @@ export default function ReviewTimelineItem({
             </span>
 
             {/* Edit/Delete Options (only user's reviews can be edited) */}
-            {review.id === uid && (
-                <div className="flex flex-row">
+            {review.user_id === uid && (
+                <div className="flex flex-wrap justify-end gap-2">
                     <button
                         className="btn btn-outline btn-secondary"
-                        onClick={() => isEditing(true)}
+                        onClick={() => setEditing(true)}
                     >
                         Edit
                     </button>
