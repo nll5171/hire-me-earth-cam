@@ -12,5 +12,6 @@ export type statusCounts = {
 };
 
 export interface SetMaking {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (value: any): void;
 }
