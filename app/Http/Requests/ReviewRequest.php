@@ -24,7 +24,7 @@ class ReviewRequest extends FormRequest
         return [
             'message' => ['required', 'string', 'min:3', 'max:1000'],
             'status' => ['required', 'integer'],
-            'id' => ['integer']
+            'id' => ['integer'],
         ];
     }
 }

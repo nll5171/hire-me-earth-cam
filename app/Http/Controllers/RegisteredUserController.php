@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
 class RegisteredUserController extends Controller
@@ -30,7 +31,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
-            'password' => ['required', 'string', 'min:3', 'max:255']
+            'password' => ['required', 'string', 'max:255', Password::min(8)->mixedCase()->numbers()],
         ]);
 
         $user = User::create([

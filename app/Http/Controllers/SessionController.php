@@ -29,7 +29,7 @@ class SessionController extends Controller
             'password' => ['required', 'string', 'min:12', 'max:255'],
         ]);
 
-        if (!Auth::attempt($attributes)) {
+        if (! Auth::attempt($attributes)) {
             // failed
             return back()
                 ->withErrors(['password' => 'We were unable to authenticate with the given credentials.'])
@@ -37,6 +37,7 @@ class SessionController extends Controller
         }
 
         $request->session()->regenerate();
+
         return redirect()->intended(route('reviews.index'))->with('success', 'You are now logged in!');
     }
 

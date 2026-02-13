@@ -1,6 +1,6 @@
 import { router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import type { review } from '@/types/reviews';
+import type { review, SetMaking } from '@/types/reviews';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export default function ReviewTimelineForm({
@@ -8,7 +8,7 @@ export default function ReviewTimelineForm({
     setMaking,
 }: {
     review?: review;
-    setMaking: Function;
+    setMaking: SetMaking;
 }) {
     const { errors } = usePage().props;
 

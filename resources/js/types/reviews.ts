@@ -10,3 +10,7 @@ export type statusCounts = {
     '1': number;
     all: number;
 };
+
+export interface SetMaking {
+    (value: any): void;
+}

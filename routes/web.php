@@ -16,7 +16,7 @@ Route::get('/', function () {
 Route::get('/reviews', [ReviewController::class, 'index'])
     ->name('reviews.index');
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])
         ->name('register.create');
     Route::post('/register', [RegisteredUserController::class, 'store'])
@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function() {
         ->name('login.store');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::post('/reviews', [ReviewController::class, 'store'])
         ->name('reviews.store');
     Route::patch('/reviews/{id}', [ReviewController::class, 'update'])

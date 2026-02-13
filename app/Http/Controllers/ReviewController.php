@@ -54,7 +54,7 @@ class ReviewController extends Controller
      */
     public function update(ReviewRequest $request)
     {
-        $review = Review::query()->where('id', $request->id)->get()[0];
+        $review = Review::findOrFail($request->id);
 
         Gate::authorize('modify', $review);
 
@@ -73,7 +73,7 @@ class ReviewController extends Controller
     public function destroy(Request $request)
     {
         $review = Review::query()->where('id', $request->id)->get()[0];
-        //dd($request->id);
+        // dd($request->id);
 
         Gate::authorize('modify', $review);
 

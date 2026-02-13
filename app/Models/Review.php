@@ -13,6 +13,7 @@ class Review extends Model
     use HasFactory;
 
     protected $casts = ['status' => ReviewStatus::class];
+
     protected $fillable = ['message', 'status'];
 
     public static function statusCounts()
@@ -25,7 +26,7 @@ class Review extends Model
 
         return collect(ReviewStatus::cases())
             ->mapWithKeys(fn ($status) => [
-                $status->value => $counts->get($status->value, 0)
+                $status->value => $counts->get($status->value, 0),
             ])
             ->put('all', Review::all()->count());
     }

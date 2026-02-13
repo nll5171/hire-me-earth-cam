@@ -1,4 +1,3 @@
-import { Link } from '@inertiajs/react';
 import ReviewTimeline from '@/components/review/review-timeline';
 import AppLayout from '@/layouts/app-layout';
 
