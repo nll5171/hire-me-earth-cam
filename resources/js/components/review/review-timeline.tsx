@@ -41,16 +41,18 @@ export default function ReviewTimeline({
                     {creating && (
                         <li>
                             <ReviewTimelineForm setMaking={setCreating} />
-                            <hr className="w-4" />
+                            <hr className="w-4 rounded-none" />
                         </li>
                     )}
 
                     {reviews.map((review, index) => (
                         <li key={review.id}>
-                            {index > 0 && <hr className="w-4" />}
+                            {(index > 0 || creating) && (
+                                <hr className="w-4 rounded-none" />
+                            )}
                             <ReviewTimelineItem uid={uid} review={review} />
                             {(index === 0 || index < reviews.length - 1) && (
-                                <hr className="w-4" />
+                                <hr className="w-4 rounded-none" />
                             )}
                         </li>
                     ))}

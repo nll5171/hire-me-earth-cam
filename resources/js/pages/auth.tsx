@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import AuthForm from '@/components/auth/auth-form';
 import AppLayout from '@/layouts/app-layout';
 
@@ -18,6 +19,31 @@ export default function Auth({
                     {isRegister ? 'Happy to have you' : 'Welcome back'}
                 </h1>
                 <AuthForm isRegister={isRegister} />
+                <p className="text-sm">
+                    {isRegister ? (
+                        <>
+                            Already have an account?{' '}
+                            <Link
+                                href="/login"
+                                className="link text-primary link-hover"
+                            >
+                                Log in
+                            </Link>
+                            .
+                        </>
+                    ) : (
+                        <>
+                            Don't have an account?{' '}
+                            <Link
+                                href="/register"
+                                className="link text-primary link-hover"
+                            >
+                                Register
+                            </Link>
+                            .
+                        </>
+                    )}
+                </p>
             </div>
         </AppLayout>
     );
