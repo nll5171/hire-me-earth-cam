@@ -35,8 +35,7 @@ export default function ReviewTimelineForm({
         e.preventDefault();
         setMaking(false);
 
-        if (review)
-            router.patch(`/reviews/${review.id}`, { ...values, id: review.id });
+        if (review) router.patch(`/reviews/${review.id}`, { ...values });
         else router.post('/reviews', values);
     }
 

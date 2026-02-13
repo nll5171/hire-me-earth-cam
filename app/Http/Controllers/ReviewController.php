@@ -70,10 +70,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
+    public function destroy(Request $request)
     {
-        //$review = Review::query()->where('id', $request->id)->get()[0];
-        dd($review);
+        $review = Review::query()->where('id', $request->id)->get()[0];
+        //dd($request->id);
 
         Gate::authorize('modify', $review);
 
