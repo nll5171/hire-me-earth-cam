@@ -50,8 +50,6 @@ class SessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        dd(Auth::User());
-
-        return route('home');
+        return to_route('home');
     }
 }
