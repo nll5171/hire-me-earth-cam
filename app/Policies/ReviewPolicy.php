@@ -9,6 +9,6 @@ class ReviewPolicy
 {
     public function modify(User $user, Review $review): bool
     {
-        return $review->user->is($user);
+        return $review->user()->is($user);
     }
 }

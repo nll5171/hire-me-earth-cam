@@ -23,16 +23,13 @@ export default function ReviewTimelineItem({
 
     return (
         <div
-            className={`timeline-box p-6 ${review.status ? 'timeline-start bg-success' : 'timeline-end bg-error'}`}
+            className={`timeline-box p-6 ${review.status ? 'timeline-end bg-error' : 'timeline-start bg-success'}`}
         >
             <span className="text-base">{review.message}</span>
-            <span className="absolute bottom-1 left-1 text-neutral-content">
-                Submitted by user #{review.user_id}
-            </span>
 
             {/* Edit/Delete Options (only user's reviews can be edited) */}
             {review.user_id === uid && (
-                <div className="flex flex-wrap justify-end gap-2">
+                <div className="mt-4 flex flex-wrap justify-end gap-2">
                     <button
                         className="btn btn-outline btn-secondary"
                         onClick={() => setEditing(true)}
@@ -40,7 +37,7 @@ export default function ReviewTimelineItem({
                         Edit
                     </button>
                     <form onSubmit={deleteReview}>
-                        <button type="submit" className="btn btn-error">
+                        <button type="submit" className="btn btn-primary">
                             Delete
                         </button>
                     </form>

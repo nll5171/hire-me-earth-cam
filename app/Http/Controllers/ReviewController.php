@@ -19,15 +19,14 @@ class ReviewController extends Controller
     {
         // Filter by user_id, status (for/against), updated_at
         $reviews = Review::query()
-            ->when($request->user_id,
-                fn ($query) => $query->where('user_id', $request->user_id))
-            ->when(in_array($request->status, ReviewStatus::values()),
-                fn ($query) => $query->where('status', $request->status))
-            ->when($request->updated_at,
-                fn ($query) => true) // TO-DO: Filter by updated_at somehow
+            // ->when($request->user_id,
+            //     fn ($query) => $query->where('user_id', $request->user_id))
+            // ->when(in_array($request->status, ReviewStatus::values()),
+            //     fn ($query) => $query->where('status', $request->status))
+            // ->when($request->updated_at,
+            //     fn ($query) => true) // TO-DO: Filter by updated_at somehow
             ->latest()
             ->get();
-
 
         $statusCounts = Review::statusCounts();
 
@@ -43,8 +42,6 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        dd($request);
-
         $data = $request->safe()->all();
         Auth::user()->reviews()->create($data);
 
@@ -55,12 +52,17 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ReviewRequest $request, Review $review)
+    public function update(ReviewRequest $request)
     {
+        $review = Review::query()->where('id', $request->id)->get()[0];
+
         Gate::authorize('modify', $review);
 
         $data = $request->safe()->all();
-        $review->update($data);
+        $review->update([
+            'message' => $data['message'],
+            'status' => $data['status'],
+        ]);
 
         return back()->with('success', 'Review updated!');
     }
@@ -70,6 +72,9 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
+        //$review = Review::query()->where('id', $request->id)->get()[0];
+        dd($review);
+
         Gate::authorize('modify', $review);
 
         $review->delete();

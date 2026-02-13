@@ -29,7 +29,7 @@ export default function Reviews({
                     <div className="divider lg:divider-horizontal"></div>
                     <div className="card grid h-60 grow basis-0 place-items-center rounded-box bg-error py-20 lg:py-0">
                         <span className="text-5xl font-bold">
-                            Against: {statusCounts[0] ?? 0}
+                            Against: {statusCounts[1] ?? 0}
                         </span>
                     </div>
                 </div>

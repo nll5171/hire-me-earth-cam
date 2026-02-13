@@ -13,6 +13,7 @@ class Review extends Model
     use HasFactory;
 
     protected $casts = ['status' => ReviewStatus::class];
+    protected $fillable = ['message', 'status'];
 
     public static function statusCounts()
     {

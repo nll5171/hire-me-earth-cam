@@ -1,7 +1,6 @@
-import { router, useForm, usePage } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import type { review } from '@/types/reviews';
-import { request } from 'http';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export default function ReviewTimelineForm({
@@ -34,10 +33,10 @@ export default function ReviewTimelineForm({
 
     function handleSubmit(e) {
         e.preventDefault();
+        setMaking(false);
 
-        console.log(request);
-
-        if (review) router.patch(`/reviews/${review.id}`, values);
+        if (review)
+            router.patch(`/reviews/${review.id}`, { ...values, id: review.id });
         else router.post('/reviews', values);
     }
 

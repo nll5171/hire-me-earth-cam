@@ -49,7 +49,7 @@ export default function ReviewTimeline({
                         <li key={review.id}>
                             {index > 0 && <hr className="w-4" />}
                             <ReviewTimelineItem uid={uid} review={review} />
-                            {index < reviews.length - 1 && (
+                            {(index === 0 || index < reviews.length - 1) && (
                                 <hr className="w-4" />
                             )}
                         </li>
