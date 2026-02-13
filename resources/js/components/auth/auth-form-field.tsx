@@ -4,12 +4,14 @@ export default function AuthFormField({
     name,
     placeholder,
     required,
+    error = '',
 }: {
     label: string;
     type: string;
     name: string;
     placeholder: string;
     required: boolean;
+    error?: string;
 }) {
     return (
         <label className="fieldset">
@@ -23,6 +25,9 @@ export default function AuthFormField({
                 required={required}
             />
             {required && <p className="validator-hint hidden">Required</p>}
+            {error && (
+                <p className="text-xs text-error first-of-type:mt-2">{error}</p>
+            )}
         </label>
     );
 }
