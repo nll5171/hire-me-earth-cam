@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
 class SessionController extends Controller
@@ -26,7 +27,7 @@ class SessionController extends Controller
     {
         $attributes = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:12', 'max:255'],
+            'password' => ['required', 'string', 'max:255', Password::min(8)->mixedCase()->numbers()],
         ]);
 
         if (! Auth::attempt($attributes)) {
