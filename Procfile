@@ -1,2 +1,2 @@
-release: php artisan migrate --force && npm install && npm run build
+release: npm install --production=false && npm run build && php artisan migrate --force && npm prune --production
 web: vendor/bin/heroku-php-nginx /public
